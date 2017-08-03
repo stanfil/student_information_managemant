@@ -1,0 +1,34 @@
+#maiN{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 50px;
+    padding: 10px;
+    border: 1px solid #5bc0de;
+}
+
+.inputForm{
+    padding: 20px;
+    height: 400px;
+}
+
+.setFontSize{
+    font-size: large;
+}
+
+td{
+    padding-right: 15px;
+}
+
+.setDivider{
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+
+#search,#change,#delete{
+    line-height: 200%;
+}
+
+.setHeight{
+    height: 35px;
+    width: 135px;
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information Management System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/main.js"></script>
+    <!--<script>-->
+<!--//        document.addEventListener("DOMContentLoaded",function () {-->
+<!--//            document.getElementById("addStudentInfo").addEventListener("submit",function(event) {-->
+<!--//                event.preventDefault();-->
+<!--//                moduleAdd();-->
+<!--//                return false;-->
+<!--//            });-->
+<!--//        });-->
+<!--//        $(document).ready(function () {-->
+<!--//            $("#deleteBtn").click(function () {-->
+<!--//                checkDeleteIdsForm();-->
+<!--//            });-->
+<!--//        });-->
+    <!--</script>-->
+</head>
+<body>
+    <div id="head">
+        <h1 align="center">Student Information Management System</h1>
+        <h2 align="center">WELCOME!</h2>
+    </div>
+
+    <div id="maiN">
+        <ul class="nav nav-tabs">
+            <li id='li1' class="active"><a href="#add" aria-controls="add" data-toggle="tab">添加一条学生成绩信息</a></li>
+            <li id="li2"><a href="#search" id='a-add' aria-controls="search" data-toggle="tab">查询多个学生成绩信息</a> </li>
+            <li id="li3"><a href="#change" aria-controls="change" data-toggle="tab">修改一条学生成绩信息</a> </li>
+            <li id="li4"><a href="#delete" aria-controls="delete" data-toggle="tab">删除多个学生成绩信息</a> </li>
+        </ul>
+        <div class="inputForm tab-content">
+            <div class="tab-pane active" id="add">
+                <form>
+                    <div class="form-group" style="line-height: 200%">
+                        <h3 class="setDivider">基本信息</h3>
+                        <table>
+                            <tr>
+                                <td><label for="inputName" class="setFontSize">姓名</label></td>
+                                <td><label for="inputId" class="setFontSize">学号</label></td>
+                                <td><label for="inputNation" class="setFontSize">民族</label></td>
+                                <td><label for="inputClass" class="setFontSize">班级</label></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="inputName"></td>
+                                <td><input type="text" id="inputId"></td>
+                                <td><input type="text" id="inputNation"></td>
+                                <td><input type="text" id="inputClass"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="form-group" style="line-height: 200%; margin-top: 30px">
+                        <h3 class="setDivider">学生成绩</h3>
+                        <table>
+                            <tr>
+                                <td><label for="inputChinese" class="setFontSize">语文</label></td>
+                                <td><label for="inputMath" class="setFontSize">数学</label></td>
+                                <td><label for="inputEnglish" class="setFontSize">英语</label></td>
+                                <td><label for="inputProgramming" class="setFontSize">编程</label></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" id="inputChinese"></td>
+                                <td><input type="text" id="inputMath"></td>
+                                <td><input type="text" id="inputEnglish"></td>
+                                <td><input type="text" id="inputProgramming"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <button id="addStudentInfo" type="submit" class="btn btn-primary btn-lg setBtnPosition">提交</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="search">
+                <h3>请按照格式输入学号（学号，学号，...）:</h3>
+                <p style="margin-top: 30px;margin-bottom: 25px"><input title="IDs" type="text" id="ids-search" style="width: 30%"></p>
+                <button type="button" class="btn btn-primary btn-lg" id="searchBtn">查询</button>
+
+                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLable">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+                                </button>
+                                <h4 class="modal-title">学生成绩单</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="transcript">
+                                        <tr>
+                                            <td>#</td>
+                                            <td>姓名</td>
+                                            <td>学号</td>
+                                            <td>语文</td>
+                                            <td>数学</td>
+                                            <td>英语</td>
+                                            <td>编程</td>
+                                            <td>平均分</td>
+                                            <td>总分</td>
+                                        </tr>
+                                    </table>
+                                    <div>
+                                        <p id="ave-mid"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-default" href="#change" onclick="$('#li3').addClass('active');$('#li2').removeClass('active');" aria-controls="change" data-toggle="tab" data-dismiss="modal">修改学生成绩</button>
+                                <button type="button" class="btn btn-default" href="#delete" onclick="$('#li4').addClass('active');$('#li2').removeClass('active');" aria-controls="change" data-toggle="tab" data-dismiss="modal">删除学生成绩</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="change">
+                <h3>请输入要更改信息同学的学号:</h3>
+                <p style="margin-top: 30px;margin-bottom: 25px"><input title="IDs" type="text" id="id-change" style="width: 30%"></p>
+                <button type="button" class="btn btn-primary btn-lg" id="changeBtn">确认</button>
+
+                <div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="myModalLable">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+                                </button>
+                                <h4 class="modal-title">学生成绩修改</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h3 align="center">基本信息</h3>
+                                <div class="table-responsive">
+                                    <table class="table" id="baseInfo">
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>学号</th>
+                                            <th>民族</th>
+                                            <th>班级</th>
+                                        </tr>
+                                        <tr>
+                                            <td><input title="name" id="name" class="setHeight" type="text"></td>
+                                            <td><input title="sn" id="sn" class="setHeight" type="text" disabled="disabled"></td>
+                                            <td><input title="nation" id="nation" class="setHeight" type="text"></td>
+                                            <td><input title="class" id="class" class="setHeight" type="text"></td>
+                                        </tr>
+                                    </table>
+                                    <h3 align="center">学生成绩</h3>
+                                    <div class="table-responsive">
+                                        <table class="table" id="gradesInfo">
+                                            <tr>
+                                                <th>语文</th>
+                                                <th>数学</th>
+                                                <th>英语</th>
+                                                <th>编程</th>
+                                            </tr>
+                                            <tr>
+                                                <td><input id="chinese" title="chinese" type="text" class="setHeight"></td>
+                                                <td><input id="math" title="math" type="text" class="setHeight"></td>
+                                                <td><input id="english" title="english" type="text" class="setHeight"></td>
+                                                <td><input id="programming" title="programming" type="text" class="setHeight"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                <button type="button" class="btn btn-primary" id="save">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="delete">
+                <h3>请输入要删除同学的学号（学号，学号，...）:</h3>
+                <p style="margin-top: 30px;margin-bottom: 25px"><input title="IDs" type="text" id="ids-delete" style="width: 30%"></p>
+                <button type="button" class="btn btn-primary btn-lg" id="deleteBtn">删除</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
